@@ -1,8 +1,12 @@
 from os import path
 from io import StringIO
-import shlex
 import subprocess
 import sys
+
+try:
+    from shlex import quote as shell_quote
+except ImportError:
+    from pipes import quote as shell_quote
 
 POPCODE_ROOT = path.abspath(path.join(path.dirname(__file__), '..', '..'))
 NODEENV_DIR = path.join(POPCODE_ROOT, 'nodeenv')
@@ -10,7 +14,11 @@ NODEENV_BASH_ACTIVATE = path.join(NODEENV_DIR, 'bin', 'activate')
 NODEENV_POWERSHELL_ACTIVATE = path.join(NODEENV_DIR, 'Scripts', 'Activate.ps1')
 
 def nodeenv_delegate(executable):
-    sys.exit(run_in_nodeenv([executable, *sys.argv[1:]]))
+    command = [executable] + sys.argv[1:]
+    if path.exists(NODEENV_DIR):
+        sys.exit(run_in_nodeenv(command))
+    else:
+        sys.exit(subprocess.call(command))
 
 def run_in_nodeenv(command):
     if _has_bash_nodeenv():
@@ -27,7 +35,7 @@ def _run_in_nodeenv_with_powershell(command):
     try:
         return subprocess.check_call(
             _generate_powershell_script_args(command, 'pwsh'))
-    except subprocess.CalledProcessError:
+    except FileNotFoundError:
         return subprocess.check_call(
             _generate_powershell_script_args(command, 'powershell'))
 
@@ -46,7 +54,7 @@ def _run_and_capture_in_nodeenv_with_powershell(command):
     try:
         return _run_and_capture_output(
             _generate_powershell_script_args(command, 'pwsh'))
-    except OSError:
+    except FileNotFoundError:
         return _run_and_capture_output(
             _generate_powershell_script_args(command, 'powershell'))
 
@@ -79,4 +87,4 @@ def _run_and_capture_output(args):
     return out.decode('utf-8')
 
 def shell_join(command):
-    return ' '.join([shlex.quote(arg) for arg in command])
+    return ' '.join([shell_quote(arg) for arg in command])
