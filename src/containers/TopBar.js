@@ -16,6 +16,7 @@ import {
   toggleLibrary,
   toggleTopBarMenu,
   unlinkGithubIdentity,
+  uploadImage,
 } from '../actions';
 import TopBar from '../components/TopBar';
 import {
@@ -142,6 +143,10 @@ function mapDispatchToProps(dispatch) {
 
     onStartGoogleLogIn() {
       dispatch(logIn());
+    },
+
+    onStartUploadImage() {
+      dispatch(uploadImage());
     },
 
     onUnlinkGitHub() {

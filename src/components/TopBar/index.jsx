@@ -68,6 +68,7 @@ export default function TopBar({
   onStartGithubLogIn,
   onStartGoogleLogIn,
   onStartEditingInstructions,
+  onStartUploadImage,
   onToggleLibrary,
   onToggleTextSize,
   onToggleViewArchived,
@@ -148,6 +149,7 @@ export default function TopBar({
           currentProjectKey,
         )}
         onStartGithubLogIn={onStartGithubLogIn}
+        onStartUploadImage={onStartUploadImage}
       />
     </header>
   );
@@ -192,6 +194,7 @@ TopBar.propTypes = {
   onStartEditingInstructions: PropTypes.func.isRequired,
   onStartGithubLogIn: PropTypes.func.isRequired,
   onStartGoogleLogIn: PropTypes.func.isRequired,
+  onStartUploadImage: PropTypes.func.isRequired,
   onToggleLibrary: PropTypes.func.isRequired,
   onToggleTextSize: PropTypes.func.isRequired,
   onToggleViewArchived: PropTypes.func.isRequired,

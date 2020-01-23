@@ -86,6 +86,7 @@ module.exports = (env = process.env.NODE_ENV || 'development') => {
         '488497217137-c0mdq8uca6ot5o9u9avo3j5mfsi1q9v5.apps.googleusercontent.com',
       FIREBASE_MEASUREMENT_ID: 'G-GSST3YLQE7',
       FIREBASE_PROJECT_ID: 'popcode-development',
+      FIREBASE_STORAGE_BUCKET: 'popcode-development.appspot.com',
       GIT_REVISION: null,
       MIXPANEL_TOKEN: '68e1844d4a34c789e9368740a3bb4ceb',
       NODE_ENV: env,

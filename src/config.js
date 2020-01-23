@@ -12,6 +12,7 @@ module.exports = {
   firebaseClientId: process.env.FIREBASE_CLIENT_ID,
   firebaseMeasurementId: process.env.FIREBASE_MEASUREMENT_ID,
   firebaseProjectId: process.env.FIREBASE_PROJECT_ID,
+  firebaseStorageBucket: process.env.FIREBASE_STORAGE_BUCKET,
 
   feedbackUrl: 'https://gitreports.com/issue/popcodeorg/popcode',
 

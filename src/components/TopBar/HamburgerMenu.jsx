@@ -25,6 +25,7 @@ const HamburgerMenu = createMenu({
     isUserAuthenticated,
     onStartEditingInstructions,
     onStartGithubLogIn,
+    onStartUploadImage,
   }) {
     return (
       <Fragment>
@@ -51,6 +52,12 @@ const HamburgerMenu = createMenu({
         >
           {i18next.t('top-bar.send-feedback')}
         </a>
+
+        {isUserAuthenticated && (
+          <MenuItem onClick={onStartUploadImage}>
+            {i18next.t('top-bar.upload-image')}
+          </MenuItem>
+        )}
 
         <div className="top-bar__menu-item top-bar__menu-item_icons">
           <a
@@ -89,6 +96,7 @@ HamburgerMenu.propTypes = {
   isUserAuthenticated: PropTypes.bool.isRequired,
   onStartEditingInstructions: PropTypes.func.isRequired,
   onStartGithubLogIn: PropTypes.func.isRequired,
+  onStartUploadImage: PropTypes.func.isRequired,
 };
 
 export default HamburgerMenu;

@@ -56,3 +56,5 @@ export const userAuthenticated = createAction(
 );
 
 export const userLoggedOut = createAction('USER_LOGGED_OUT');
+
+export const uploadImage = createAction('USER_UPLOAD_IMAGE');

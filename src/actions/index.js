@@ -75,6 +75,7 @@ import {
   logOut,
   startAccountMigration,
   unlinkGithubIdentity,
+  uploadImage,
   userAuthenticated,
   userLoggedOut,
 } from './user';
@@ -143,4 +144,5 @@ export {
   saveProject,
   openLoginPrompt,
   closeLoginPrompt,
+  uploadImage,
 };

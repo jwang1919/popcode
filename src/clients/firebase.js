@@ -35,7 +35,7 @@ for (const scope of GOOGLE_SCOPES) {
   googleAuthProvider.addScope(scope);
 }
 
-const {auth, loadDatabase} = buildFirebase();
+const {auth, loadDatabase, storage} = buildFirebase();
 
 async function loadDatabaseSdk() {
   return retryingFailedImports(() =>
@@ -55,6 +55,7 @@ function buildFirebase(appName = undefined) {
       databaseURL: `https://${config.firebaseApp}.firebaseio.com`,
       measurementId: config.firebaseMeasurementId,
       projectId: config.firebaseProjectId,
+      storageBucket: config.firebaseStorageBucket
     },
     appName,
   );
@@ -71,6 +72,8 @@ function buildFirebase(appName = undefined) {
       await loadDatabaseSdk();
       return firebase.database(app);
     }),
+
+    storage: firebase.storage(),
 
     ...rest,
   };
@@ -283,4 +286,15 @@ export function setSessionUid() {
       expires: new Date(Date.now() + SESSION_TTL_MS),
     });
   }
+}
+
+export function uploadImage(blob) {
+  const ref = storage().ref();
+  ref.put(blob).then(snapshot => {
+    console.log('Uploaded a blob!');
+    return snapshot;
+  }).catch(error => {
+    console.error('Encountered error');
+    console.error(error);
+  });
 }

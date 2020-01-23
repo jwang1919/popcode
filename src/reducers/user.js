@@ -2,6 +2,7 @@ import {Map} from 'immutable';
 import find from 'lodash-es/find';
 import isUndefined from 'lodash-es/isUndefined';
 import reduce from 'lodash-es/reduce';
+import {uploadImage as ui} from '../clients/firebase';
 
 import {AccountMigrationState, LoginState} from '../enums';
 import {
@@ -55,6 +56,22 @@ function createUserAccountFromProfileAndCredential(profile, credential) {
       }),
     }),
   });
+}
+
+function uploadImage() {
+  // const url = prompt('Enter an image url');
+  return fetch('https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        console.log("Downloaded image");
+        return response.blob();
+      })
+      .then(blob => {
+        console.log("Uploading blob");
+        return ui(blob);
+      });
 }
 
 function user(stateIn, action) {
@@ -138,6 +155,9 @@ function user(stateIn, action) {
 
     case 'USER_LOGGED_OUT':
       return new User().set('loginState', LoginState.ANONYMOUS);
+
+    case 'USER_UPLOAD_IMAGE':
+      return uploadImage();
 
     default:
       return state;

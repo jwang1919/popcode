@@ -26,6 +26,7 @@
     "project-saved": "Saved!",
     "new-project": "New Project",
     "send-feedback": "Send Feedback",
+    "upload-image": "Upload Image",
     "session": {
       "link-github": "Link GitHub",
       "unlink-github": "Unlink {{displayName}}'s Github",
